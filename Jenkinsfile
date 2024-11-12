@@ -11,7 +11,7 @@ pipeline {
     }
 
     tools {
-        git 'git'  
+        //git 'git'  
         //now we can use git
     }
 
