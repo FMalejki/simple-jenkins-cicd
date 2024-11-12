@@ -1,5 +1,8 @@
 //CODE_CHANGES = ifGitStateChanged() (groovy script)
 //list of all env variables is on localhost:8080/env-vars.html
+
+def gv
+
 pipeline {
 
     agent any
@@ -22,11 +25,19 @@ pipeline {
     }
 
     stages {
-
+        stage("init") {
+            steps {
+                script {
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage("build") {
             
             steps {
-
+                script {
+                    gv.buildApp()
+                }
                 echo "hello world build"
                 echo "building version {$NEW_VERSION}"
             }
@@ -48,6 +59,9 @@ pipeline {
             }
 
             steps{
+                script {
+                    gv.testApp()
+                }
                 echo "hello world test"
             }
 
@@ -56,7 +70,11 @@ pipeline {
         stage("deploy") {
             
             steps{
+                script {
+                    gv.deployApp()
+                }
                 echo "hello world deploy"
+                sh 'echo "shell script added by Pipeline Script"'
             }
 
         }
