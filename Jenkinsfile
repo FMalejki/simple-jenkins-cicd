@@ -10,10 +10,10 @@ pipeline {
         //we need to install credentials extension for jenkins
     }
 
-    tools {
+    /*tools {
         //git 'git'  
         //now we can use git
-    }
+    }*/
 
     parameters {
         //string(name: 'VERSION', defaultValue: '', description: 'version to deploy')
@@ -61,7 +61,7 @@ pipeline {
 
         }
     }
-    post {
+    /*post {
         always {
             echo "deployed version {$params.VERSION}"
         }
@@ -71,5 +71,5 @@ pipeline {
         failure {
 
         }
-    }
+    }*/
 }
